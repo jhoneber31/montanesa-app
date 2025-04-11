@@ -9,3 +9,6 @@ export * from './product/slideShow/ProductSlideShow';
 export * from './product/slideShow/ProductMobileSlideShow';
 export * from './ui/footer/Footer';
 export * from './ui/pagination/Pagination';
+export * from './providers/Providers';
+export * from './paypal/PaypalButton';
+export * from './orders/OrderStatus'

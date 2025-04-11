@@ -13,5 +13,14 @@ interface CategoryName {
   name: string;
 }
 
+export interface CartProduct {
+  id: string;
+  slug: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
 export type Category = "panes" | "tortas" | "chifones-kekes" | "galletas";
 

@@ -1,7 +1,7 @@
 import { getProductBySlug } from "@/actions";
 import { ProductMobileSlideShow, ProductSlideShow } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/AddToCart";
 
@@ -11,7 +11,7 @@ interface Props {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  // parent: ResolvingMetadata
 ): Promise<Metadata> {
   // read route params
   const slug = (await params).slug
@@ -62,7 +62,9 @@ export default async function ProductSlugPage({params}: Props) {
       <div className="col-span-1 px-5">
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.name}</h1>
         <p className="text-lg mb-5">S/. {product.price}</p>
-        <AddToCart/>
+        <AddToCart
+          product={product}
+        />
         <h3 className="font-bold text-sm">Descripción</h3>
         <p className="font-light">
           {product.description}

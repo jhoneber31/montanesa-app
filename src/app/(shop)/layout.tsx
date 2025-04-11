@@ -1,4 +1,5 @@
 import { Footer, Sidebar, TopMenu } from "@/components";
+import { Suspense } from "react";
 
 export default function ShopLayout({
  children
@@ -8,7 +9,9 @@ export default function ShopLayout({
   return (
     <main className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
       <TopMenu/>
-      <Sidebar/>
+      <Suspense>
+        <Sidebar/>
+      </Suspense>
       <div className="px-0 sm:px-10">
         {children}
       </div>

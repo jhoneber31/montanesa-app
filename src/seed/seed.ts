@@ -1,6 +1,9 @@
+import bycriptjs from 'bcryptjs';
+
 interface SeedData {
   categories: string[];
   products: Product[];
+  users: SeedUser[];
 }
 
 interface Product {
@@ -15,14 +18,29 @@ interface Product {
 
 type Category = "panes" | "tortas" | "chifones-kekes" | "galletas";
 
-// interface User {
-//   email: string;
-//   name: string;
-//   role: string;
-// }
+interface SeedUser {
+  email: string;
+  name: string;
+  role: 'admin' | 'user';
+  password: string;
+}
 
 export const initialData: SeedData = {
   categories: ["Panes", "Tortas", "Chifones-kekes", "Galletas"],
+  users: [
+    {
+      email: "jhoneber31@gmail.com",
+      name: "jhoneber31",
+      password: bycriptjs.hashSync("123456"),
+      role: "admin",
+    },
+    {
+      email: "juan20@gmail.com",
+      name: "juan31",
+      password: bycriptjs.hashSync("123456"),
+      role: "user",
+    }
+  ],
   products: [
     {
       name: "Pan Francés",

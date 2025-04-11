@@ -10,6 +10,11 @@ export const getProductBySlug = async (slug: string) => {
           select: {
             url: true
           }
+        },
+        category: {
+          select: {
+            name: true
+          }
         }
       },
       where: {
@@ -21,13 +26,15 @@ export const getProductBySlug = async (slug: string) => {
       return null;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { categoryId ,ProductImage, ...rest } = product;
+
     return {
-      ...product,
+      ...rest,
       images: product.ProductImage.map(image => image.url)
     }
 
   } catch (error) {
-    console.log(error);
     throw new Error('Error al obtener el producto');
   }
 }
