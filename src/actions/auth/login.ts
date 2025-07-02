@@ -10,7 +10,6 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    // await new Promise(resolve => setTimeout(resolve, 2000));
 
     await signIn("credentials", {
       ...Object.fromEntries(formData),

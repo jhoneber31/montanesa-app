@@ -18,8 +18,6 @@ export default async function OrdersByIdPage({ params }: Props) {
 
   const addres = order?.OrderAddress;
 
-  //TODO: verificar
-
   return (
     <div className="flex justify-center items-center px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">

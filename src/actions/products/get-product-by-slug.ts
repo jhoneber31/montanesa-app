@@ -8,12 +8,14 @@ export const getProductBySlug = async (slug: string) => {
       include: {
         ProductImage: {
           select: {
-            url: true
+            url: true,
+            id: true
           }
         },
         category: {
           select: {
-            name: true
+            name: true,
+            id: true
           }
         }
       },
@@ -27,7 +29,7 @@ export const getProductBySlug = async (slug: string) => {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { categoryId ,ProductImage, ...rest } = product;
+    const { categoryId , ...rest } = product;
 
     return {
       ...rest,

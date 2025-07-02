@@ -18,7 +18,6 @@ export const getPaginatedProductsWithImages = async ({
   if (page < 1) page = 1;
 
   try {
-
     let categoryId;
 
     if( category) {

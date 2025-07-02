@@ -15,11 +15,9 @@ export const TopMenu = () => {
   useEffect(() => {
     setLoaded(true);
   }, []);
-  
 
   return (
     <nav className="flex px-5 justify-between items-center w-full">
-      {/* logo */}
       <div>
         <Link href="/">
           <span className={`${titleFont.className} antialiased font-bold`}>
@@ -28,7 +26,6 @@ export const TopMenu = () => {
           <span> | Panaderia</span>
         </Link>
       </div>
-      {/* center menu */}
       <div className="hidden md:block">
         <Link
           href="/category/panes"
@@ -55,14 +52,16 @@ export const TopMenu = () => {
           Galletas
         </Link>
       </div>
-      {/* search cart and menu */}
       <div className="flex items-center">
         <Link href="/search">
           <IoSearchOutline className="w-5 h-5" />
         </Link>
-        <Link href={(totalItems === 0 && loaded) ? "/empty" : "/cart"} className="mx-2">
+        <Link
+          href={totalItems === 0 && loaded ? "/empty" : "/cart"}
+          className="mx-2"
+        >
           <div className="relative">
-            {(totalItems > 0 && loaded) && (
+            {totalItems > 0 && loaded && (
               <span className="absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white">
                 {totalItems}
               </span>

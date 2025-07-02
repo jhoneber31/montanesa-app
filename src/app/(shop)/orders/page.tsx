@@ -1,6 +1,7 @@
 // https://tailwindcomponents.com/component/hoverable-table
 import { getOrderByUser } from "@/actions";
 import { Title } from "@/components";
+import { currencyFormat } from "@/utils";
 
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -9,6 +10,8 @@ import { IoCardOutline } from "react-icons/io5";
 
 export default async function OrdersPage() {
   const { ok, orders = [] } = await getOrderByUser();
+
+  console.log({ orders });
 
   if (!ok) {
     redirect("/auth/login");
@@ -44,6 +47,30 @@ export default async function OrdersPage() {
                 scope="col"
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
+                Fecha
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Cantidad de productos
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Total
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Ticket Promedio
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
                 Opciones
               </th>
             </tr>
@@ -73,8 +100,27 @@ export default async function OrdersPage() {
                     </>
                   )}
                 </td>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  {order.createdAt.toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })}
+                </td>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  {order.itemsInOrder}
+                </td>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  {currencyFormat(order.total)}
+                </td>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  S/. {(order.total / order.itemsInOrder).toFixed(2)}
+                </td>
                 <td className="text-sm text-gray-900 font-light px-6 ">
-                  <Link href={`/orders/${order.id}`} className="hover:underline">
+                  <Link
+                    href={`/orders/${order.id}`}
+                    className="hover:underline"
+                  >
                     Ver orden
                   </Link>
                 </td>

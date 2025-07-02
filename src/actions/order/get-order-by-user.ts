@@ -13,11 +13,13 @@ export const getOrderByUser = async () => {
     }
   }
 
-  try {
-    
+  try {  
     const orders = await prisma.order.findMany({
-      where: {
-        userId: session.user.id
+      // where: {
+      //   userId: session.user.id
+      // },
+      orderBy: {
+        isPaid: "desc"
       },
       include: {
         OrderAddress: {

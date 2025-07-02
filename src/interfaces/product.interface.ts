@@ -9,8 +9,15 @@ export interface Product {
   slug:        string;
 }
 
+export interface ProductImage {
+  id: number;
+  url: string;
+  productId?: string;
+}
+
 interface CategoryName {
   name: string;
+  id?: string;
 }
 
 export interface CartProduct {

@@ -10,3 +10,8 @@ export * from './order/place-order';
 export * from './order/get-order-by-user';
 export * from './payments/set-order';
 export * from './payments/paypal-payment';
+export * from './users/get-paginater-users';
+export * from './users/change-user-role';
+export * from './products/get-categories';
+export * from './products/create-update-product';
+export * from './products/delete-product-images';

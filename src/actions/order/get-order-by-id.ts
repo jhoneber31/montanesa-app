@@ -51,7 +51,7 @@ export const getOrderById = async (id:string) => {
     }
 
     if(session.user.role === "user") {
-      if(session.user.id ! === order.userId) {
+      if(session.user.id !== order.userId) {
         return {
           ok: false,
           message: 'Unauthorized'

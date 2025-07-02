@@ -1,9 +1,10 @@
-import { getProductBySlug } from "@/actions";
+import { getPaginatedProductsWithImages, getProductBySlug } from "@/actions";
 import { ProductMobileSlideShow, ProductSlideShow } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/AddToCart";
+import { SuggestionsProduct } from "./ui/SuggestionsProduct";
 
 interface Props {
   params: Promise<{slug: string}>;
@@ -39,26 +40,30 @@ export default async function ProductSlugPage({params}: Props) {
 
   const product = await getProductBySlug(slug);
 
+  const relatedProducts = await getPaginatedProductsWithImages({
+    page: 2,
+    take: 4,
+    category: product?.category.name || "",
+  })
+
   if(!product) {
     notFound();
   }
 
   return (
-    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
-      {/* slideshow */}
-      <div className="col-span-1 md:col-span-2">
+    <div className="mt-5 mb-20 grid grid-cols-1 xl:grid-cols-4 gap-3">
+      <div className="col-span-1 xl:col-span-2">
         <ProductSlideShow
           title={product.name}
           images={product.images}
-          className="hidden md:block"
+          className="hidden xl:block"
         />
         <ProductMobileSlideShow
           title={product.name}
           images={product.images}
-          className="block md:hidden"
+          className="block xl:hidden"
         />
       </div>
-      {/* detalles */}
       <div className="col-span-1 px-5">
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>{product.name}</h1>
         <p className="text-lg mb-5">S/. {product.price}</p>
@@ -69,6 +74,10 @@ export default async function ProductSlugPage({params}: Props) {
         <p className="font-light">
           {product.description}
         </p>
+      </div>
+      <div className="col-span-1 xl:col-span-1">
+        <h2 className="font-semibold text-xl">Productos Sugeridos</h2>
+        <SuggestionsProduct products={relatedProducts.products} />
       </div>  
     </div>
   );

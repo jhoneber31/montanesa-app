@@ -4,7 +4,6 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Country, IAddress } from "@/interfaces";
 import { useAddressStore } from "@/store";
-import { useEffect } from "react";
 import { deleteUserAddress, setUserAddress } from "@/actions";
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
@@ -44,14 +43,15 @@ export const AddressForm = ({ countries, userStoredAddress={} }:Props) => {
     defaultValues: {
       ...userStoredAddress,
       rememberAddress: false,
-    }
+    },
+    mode: "onChange",
   });
 
   const onSubmit = async(data: FormInputs) => {
 
     const { rememberAddress, ...rest } = data;
 
-    setAddress(rest);
+    // setAddress(rest);
 
     if(rememberAddress) {
       await setUserAddress(rest, dataSession?.user?.id!);
@@ -61,12 +61,6 @@ export const AddressForm = ({ countries, userStoredAddress={} }:Props) => {
 
     router.push('/checkout');
   };
-
-  useEffect(() => {
-    if(address.firstName) {
-      reset(address);
-    }
-  }, []);
 
   return (
     <form

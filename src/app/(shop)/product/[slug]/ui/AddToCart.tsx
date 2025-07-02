@@ -3,13 +3,15 @@
 import { QuantitySelector } from "@/components";
 import { CartProduct, Product } from "@/interfaces";
 import { useCartStore } from "@/store";
+import clsx from "clsx";
 import { useState } from "react";
 
 interface Props {
   product: Product;
+  classNameContainer?: React.HTMLAttributes<HTMLDivElement>["className"];
 }
 
-export const AddToCart = ({product}:Props) => {
+export const AddToCart = ({product, classNameContainer}:Props) => {
 
   const addProductToCart = useCartStore((state) => state.addProductToCart);
 
@@ -31,7 +33,7 @@ export const AddToCart = ({product}:Props) => {
   };
 
   return (
-    <>
+    <div className={clsx(classNameContainer)}>
       <QuantitySelector 
         quantity={qantity} 
         onQuantityChange={setQantity}
@@ -41,6 +43,6 @@ export const AddToCart = ({product}:Props) => {
         className="btn-primary my-5"
       >
         Agregar al carrito</button>
-    </>
+    </div>
   );
 };
